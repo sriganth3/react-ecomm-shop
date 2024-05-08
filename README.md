@@ -4,3 +4,5 @@ npm install scss
 
 <!-- https://reactrouter.com/en/main -->
 npm install react-router-dom@6 
+
+npm install firebase
