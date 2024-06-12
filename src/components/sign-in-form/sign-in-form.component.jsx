@@ -22,10 +22,10 @@ const SignInForm = () => {
     const { setCurrentUser } = useContext(UserContext);
 
     const signInWithGoogle = async () => {
-        const response = await signInWithGooglePopup();
-        console.log(response);
-
-        await createUserDocumentFromAuth(response.user);
+        const { user } = await signInWithGooglePopup();
+        
+        setCurrentUser(user);
+        await createUserDocumentFromAuth(user);
     }
 
     console.log('signIn Form');
