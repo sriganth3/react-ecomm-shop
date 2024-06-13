@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 
@@ -15,7 +15,7 @@ const firebaseConfig = {
 export default firebaseConfig;
   
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -54,7 +54,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
       console.log('error creating the user', error.message);
     }
   }else{
-    console.log('user already exists');
+    console.debug('user already exists');
   }
 
   return userDocRef;
@@ -76,3 +76,7 @@ export const firebaseSignInWithEmailAndPassword = async (email, password) => {
   }
     return await signInWithEmailAndPassword(auth, email, password);
 }
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);

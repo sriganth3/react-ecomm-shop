@@ -4,7 +4,7 @@ import Button from '../button/button.component.jsx';
 
 import { useState } from 'react';
 import { firebaseSignInWithEmailAndPassword } from "../../utils/firebase.utils";
-import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase.utils.js";
+import { signInWithGooglePopup } from "../../utils/firebase.utils.js";
 
 
 import "./sign-in-form.styles.scss";
@@ -17,12 +17,8 @@ const SignInForm = () => {
 
     const [formFields, setFormFields] =  useState(defaultFormFields);
     const { email, password } = formFields;
-
     const signInWithGoogle = async () => {
-        const response = await signInWithGooglePopup();
-        console.log(response);
-
-        await createUserDocumentFromAuth(response.user);
+        await signInWithGooglePopup();
     }
 
     console.log('signIn Form');
@@ -32,15 +28,12 @@ const SignInForm = () => {
 
         try{
             if(!email || !password){
-                alert('')
+                alert('Empty Email or Password')
                 return;
             }
            const res = firebaseSignInWithEmailAndPassword(email, password);
-           res.then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(userCredential);
-            // ...
+           res.then(() => {
+            console.debug('user signed in')
           })
           .catch((error) => {
             const errorCode = error.code;
