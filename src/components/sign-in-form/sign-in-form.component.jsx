@@ -2,10 +2,9 @@
 import FormInput from '../form-input/form-input.component.jsx';
 import Button from '../button/button.component.jsx';
 
-import { useState, useContext } from 'react';
-import { UserContext } from '../../contexts/user.context.jsx';
+import { useState } from 'react';
 import { firebaseSignInWithEmailAndPassword } from "../../utils/firebase.utils";
-import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase.utils.js";
+import { signInWithGooglePopup } from "../../utils/firebase.utils.js";
 
 
 import "./sign-in-form.styles.scss";
@@ -18,14 +17,8 @@ const SignInForm = () => {
 
     const [formFields, setFormFields] =  useState(defaultFormFields);
     const { email, password } = formFields;
-
-    const { setCurrentUser } = useContext(UserContext);
-
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        
-        setCurrentUser(user);
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     }
 
     console.log('signIn Form');
@@ -39,12 +32,8 @@ const SignInForm = () => {
                 return;
             }
            const res = firebaseSignInWithEmailAndPassword(email, password);
-           res.then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-
-            setCurrentUser(user);
-            // ...
+           res.then(() => {
+            console.debug('user signed in')
           })
           .catch((error) => {
             const errorCode = error.code;
