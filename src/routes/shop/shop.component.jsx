@@ -1,4 +1,3 @@
-import SHOP_DATA from '../../shop-data.json';
 import ProductCard from '../../components/product-card/product-card.component.jsx';
 import { ProductsContext } from '../../contexts/products.context.jsx';
 import { useContext } from 'react';
