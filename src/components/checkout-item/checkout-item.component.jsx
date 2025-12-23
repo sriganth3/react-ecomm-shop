@@ -1,7 +1,7 @@
 import Button from "../button/button.component";
 import "./checkout-item.styles.scss";
 
-const CheckOutItem = ({ checkoutItem }) => {
+const CheckOutItem = ({ checkoutItem, addItemToCart, removeItemFromCart}) => {
   console.log(checkoutItem);
   const { id, name, quantity, imageUrl, price } = checkoutItem;
   return (
@@ -24,9 +24,9 @@ const CheckOutItem = ({ checkoutItem }) => {
               <th><img src={imageUrl}></img></th>
               <th>{name}</th>
               <th><div>
-              <Button>{"<"}</Button>
+              <Button onClick={() => removeItemFromCart(checkoutItem)}>{"decrement"}</Button>
                 {quantity}
-                <Button>{">"}</Button>
+                <Button onClick={() => addItemToCart(checkoutItem)}>{"increment"}</Button>
               </div>
                 </th>
               <th>{price}</th>

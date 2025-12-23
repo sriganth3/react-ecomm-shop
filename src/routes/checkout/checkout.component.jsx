@@ -7,12 +7,12 @@ import CheckOutItem from "../../components/checkout-item/checkout-item.component
 
 const CheckOut = () => {
 
-    const {cartItems} = useContext(CartContext);
+    const {cartItems, addItemToCart, removeItemFromCart} = useContext(CartContext);
     return (
         <div>
         {/* <h1>CheckOut Component</h1>
         <h1>{JSON.stringify(cartItems)}</h1> */}
-        {cartItems.map(item => <CheckOutItem key={item.id} checkoutItem={item}/>)}
+        {cartItems.map(item => <CheckOutItem key={item.id} checkoutItem={item} addItemToCart={addItemToCart} removeItemFromCart={removeItemFromCart}/>)}
         {/* {    cartItems.forEach(element => {
                 <p>"abc"</p>
         })} */}
