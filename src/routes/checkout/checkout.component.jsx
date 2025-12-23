@@ -7,16 +7,33 @@ import CheckOutItem from "../../components/checkout-item/checkout-item.component
 
 const CheckOut = () => {
 
-    const {cartItems} = useContext(CartContext);
+    const {cartItems, addItemToCart, removeItemFromCart, cartTotal} = useContext(CartContext);
     return (
-        <div>
-        {/* <h1>CheckOut Component</h1>
-        <h1>{JSON.stringify(cartItems)}</h1> */}
-        {cartItems.map(item => <CheckOutItem key={item.id} checkoutItem={item}/>)}
-        {/* {    cartItems.forEach(element => {
-                <p>"abc"</p>
-        })} */}
+        <div className="checkout-container">
+            <div className="checkout-header">
+                <div className="header-block">
+                    <span>Product</span>
+                </div>
+                <div className="header-block">
+                    <span>Description</span>
+                </div>
+                <div className="header-block">
+                    <span>Quantity</span>
+                </div>
+                <div className="header-block">
+                    <span>Price</span>
+                </div>
+                <div className="header-block">
+                    <span>Remove</span>
+                </div>
+            </div>
+
+            {cartItems.map(item => <CheckOutItem key={item.id} checkoutItem={item} addItemToCart={addItemToCart} removeItemFromCart={removeItemFromCart}/>)}
+
+        <span className="Total">Total: $ {cartTotal}</span>
         </div>
+
+        
     )
 }
 
